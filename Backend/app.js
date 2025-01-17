@@ -5,6 +5,10 @@ dotenv.config();
 
 const cors = require('cors')
 app.use(cors());
+const connectToDb = require('./db/db');
+
+// Connect to MongoDB
+connectToDb();
 
 app.get('/', (req, res) => {
     res.send("hello world");
