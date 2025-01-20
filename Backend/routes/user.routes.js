@@ -3,6 +3,7 @@ const router = express.Router();
 const { body } = require('express-validator')
 const userController = require('../controllers/user.controller')
 const userService = require('../services/user.service')
+const authMiddleware =  require('../middlewares/user.middleware')
 
 router.post('/register',[
     body('fullname.firstname').isLength({ min: 3 }).withMessage('Firstname length must be 3 characters long'),
@@ -19,5 +20,6 @@ router.post('/login', [
     userController.loginUser
 )
 
+router.get('/profile', authMiddleware.authUser, userController.getUserProfile)
 
 module.exports = router;
